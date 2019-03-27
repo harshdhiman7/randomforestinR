@@ -1,0 +1,13 @@
+head(data)
+summary(data)
+train<-sample(1:4461,4000,replace = FALSE)
+traindata<-data[train,]
+testdata<-data[-train,]
+xtrain<-traindata[,c(1,2,3,5,6)]
+ytrain<-traindata[,4]
+xtest<-testdata[,4]
+xy<-cbind(xtrain,ytrain)
+library(randomForest)
+rfrobj<-randomForest(data,~.,xy,ntree=500)
+summary(rfrobj)
+predict.rfr<-predict(rfrobj,xtest)
